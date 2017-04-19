@@ -1,26 +1,25 @@
 # mch-template
 
-To compile: 
+## To compile: 
 
 mvn clean package
 
-To create images: 
+## To create images: 
 
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-To list containers
+## To list containers
 
 docker ps
 
-To stop a container
+## To stop a container
 
 docker stop <containerId>
 
-
-To delete a container
+## To delete a container
 
 docker rm <containerId>
 
-To delete an image
+## To delete an image
 
 docker rmi <image name>
