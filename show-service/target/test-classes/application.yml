@@ -1,5 +1,0 @@
-spring:
-  data:
-    mongodb:
-      database: dmi-test
-      port: 0
