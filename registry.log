@@ -1,0 +1,328 @@
+2017-04-10 12:45:45.328  INFO 1 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0: startup date [Mon Apr 10 12:45:45 UTC 2017]; root of context hierarchy
+2017-04-10 12:45:52.355  INFO 1 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-04-10 12:45:52.995  INFO 1 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$cc6edf61] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.4.3.RELEASE)
+
+2017-04-10 12:46:00.144  INFO 1 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at: http://config:8888
+2017-04-10 12:46:01.010  WARN 1 --- [           main] o.s.boot.SpringApplication               : Error handling failed (ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@36f6e879: startup date [Thu Jan 01 00:00:00 UTC 1970]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0)
+2017-04-10 12:46:01.052 ERROR 1 --- [           main] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.IllegalStateException: Could not locate PropertySource and the fail fast property is set, failing
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.locate(ConfigServicePropertySourceLocator.java:130) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:89) ~[spring-cloud-context-1.1.3.RELEASE.jar!/:1.1.3.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:635) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:349) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:313) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1186) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1175) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at com.dminc.registry.RegistryApplication.main(RegistryApplication.java:12) [classes!/:1.0.0-SNAPSHOT]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) [registry.jar:1.0.0-SNAPSHOT]
+Caused by: org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config:8888/registry/default": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:633) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:580) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:498) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.getRemoteEnvironment(ConfigServicePropertySourceLocator.java:170) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.locate(ConfigServicePropertySourceLocator.java:91) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	... 15 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_111]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_111]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_111]
+	at java.net.Socket.connect(Socket.java:538) ~[na:1.8.0_111]
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:180) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:432) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:527) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.<init>(HttpClient.java:211) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.New(HttpClient.java:308) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.New(HttpClient.java:326) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1202) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1138) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:966) ~[na:1.8.0_111]
+	at org.springframework.http.client.SimpleBufferingClientHttpRequest.executeInternal(SimpleBufferingClientHttpRequest.java:78) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:53) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:93) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator$BasicAuthorizationInterceptor.intercept(ConfigServicePropertySourceLocator.java:231) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:85) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:69) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:53) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:619) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	... 19 common frames omitted
+
+2017-04-10 12:46:15.355  INFO 1 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0: startup date [Mon Apr 10 12:46:15 UTC 2017]; root of context hierarchy
+2017-04-10 12:46:19.488  INFO 1 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-04-10 12:46:19.889  INFO 1 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$cc6edf61] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.4.3.RELEASE)
+
+2017-04-10 12:46:24.734  INFO 1 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at: http://config:8888
+2017-04-10 12:46:25.746  WARN 1 --- [           main] o.s.boot.SpringApplication               : Error handling failed (ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@36f6e879: startup date [Thu Jan 01 00:00:00 UTC 1970]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0)
+2017-04-10 12:46:25.783 ERROR 1 --- [           main] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.IllegalStateException: Could not locate PropertySource and the fail fast property is set, failing
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.locate(ConfigServicePropertySourceLocator.java:130) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:89) ~[spring-cloud-context-1.1.3.RELEASE.jar!/:1.1.3.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:635) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:349) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:313) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1186) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1175) [spring-boot-1.4.3.RELEASE.jar!/:1.4.3.RELEASE]
+	at com.dminc.registry.RegistryApplication.main(RegistryApplication.java:12) [classes!/:1.0.0-SNAPSHOT]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_111]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_111]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_111]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_111]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) [registry.jar:1.0.0-SNAPSHOT]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) [registry.jar:1.0.0-SNAPSHOT]
+Caused by: org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config:8888/registry/default": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:633) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:580) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:498) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.getRemoteEnvironment(ConfigServicePropertySourceLocator.java:170) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator.locate(ConfigServicePropertySourceLocator.java:91) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	... 15 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_111]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_111]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_111]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_111]
+	at java.net.Socket.connect(Socket.java:538) ~[na:1.8.0_111]
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:180) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:432) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:527) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.<init>(HttpClient.java:211) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.New(HttpClient.java:308) ~[na:1.8.0_111]
+	at sun.net.www.http.HttpClient.New(HttpClient.java:326) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1202) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1138) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032) ~[na:1.8.0_111]
+	at sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:966) ~[na:1.8.0_111]
+	at org.springframework.http.client.SimpleBufferingClientHttpRequest.executeInternal(SimpleBufferingClientHttpRequest.java:78) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:53) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:93) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.cloud.config.client.ConfigServicePropertySourceLocator$BasicAuthorizationInterceptor.intercept(ConfigServicePropertySourceLocator.java:231) ~[spring-cloud-config-client-1.2.0.RELEASE.jar!/:1.2.0.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:85) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:69) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:53) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:619) ~[spring-web-4.3.2.RELEASE.jar!/:4.3.2.RELEASE]
+	... 19 common frames omitted
+
+2017-04-10 12:46:39.300  INFO 1 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0: startup date [Mon Apr 10 12:46:39 UTC 2017]; root of context hierarchy
+2017-04-10 12:46:42.508  INFO 1 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-04-10 12:46:42.879  INFO 1 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$cc6edf61] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.4.3.RELEASE)
+
+2017-04-10 12:46:48.146  INFO 1 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at: http://config:8888
+2017-04-10 12:46:50.142  INFO 1 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=registry, profiles=[default], label=null, version=null, state=null
+2017-04-10 12:46:50.150  INFO 1 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource [name='configService', propertySources=[MapPropertySource [name='classpath:/shared/registry.yml'], MapPropertySource [name='classpath:/shared/application.yml']]]
+2017-04-10 12:46:50.472  INFO 1 --- [           main] com.dminc.registry.RegistryApplication   : No active profile set, falling back to default profiles: default
+2017-04-10 12:46:50.765  INFO 1 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@531be3c5: startup date [Mon Apr 10 12:46:50 UTC 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0
+2017-04-10 12:47:06.702  WARN 1 --- [           main] o.s.c.a.ConfigurationClassPostProcessor  : Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-04-10 12:47:08.843  INFO 1 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=922558f9-504b-37fe-bbc3-eeba42282a82
+2017-04-10 12:47:08.907  INFO 1 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-04-10 12:47:09.282  INFO 1 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$cc6edf61] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-04-10 12:47:11.807  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8761 (http)
+2017-04-10 12:47:11.920  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-04-10 12:47:11.928  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.6
+2017-04-10 12:47:12.616  INFO 1 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-04-10 12:47:12.620  INFO 1 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 21854 ms
+2017-04-10 12:47:17.763  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'metricsFilter' to: [/*]
+2017-04-10 12:47:17.782  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-04-10 12:47:17.784  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-04-10 12:47:17.785  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-04-10 12:47:17.786  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-04-10 12:47:17.788  INFO 1 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'webRequestTraceFilter' to: [/*]
+2017-04-10 12:47:17.792  INFO 1 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'servletContainer' to urls: [/eureka/*]
+2017-04-10 12:47:17.795  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'applicationContextIdFilter' to: [/*]
+2017-04-10 12:47:17.800  INFO 1 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-04-10 12:47:18.763  INFO 1 --- [ost-startStop-1] c.s.j.s.i.a.WebApplicationImpl           : Initiating Jersey application, version 'Jersey: 1.19.1 03/11/2016 02:08 PM'
+2017-04-10 12:47:19.621  INFO 1 --- [ost-startStop-1] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2017-04-10 12:47:19.637  INFO 1 --- [ost-startStop-1] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2017-04-10 12:47:20.791  INFO 1 --- [ost-startStop-1] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2017-04-10 12:47:20.792  INFO 1 --- [ost-startStop-1] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2017-04-10 12:47:24.573  INFO 1 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2017-04-10 12:47:24.938  INFO 1 --- [           main] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2017-04-10 12:47:25.035  INFO 1 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1491828445020 with initial instances count: 0
+2017-04-10 12:47:25.634  INFO 1 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2017-04-10 12:47:25.644  INFO 1 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://registry:8761/eureka/]
+2017-04-10 12:47:26.691  INFO 1 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2017-04-10 12:47:26.691  INFO 1 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2017-04-10 12:47:26.692  INFO 1 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2017-04-10 12:47:26.692  INFO 1 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2017-04-10 12:47:27.703  INFO 1 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://registry:8761/eureka/
+2017-04-10 12:47:27.810  INFO 1 --- [           main] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2017-04-10 12:47:27.811  INFO 1 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2017-04-10 12:47:31.070  INFO 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@531be3c5: startup date [Mon Apr 10 12:46:50 UTC 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0
+2017-04-10 12:47:32.224  INFO 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String org.springframework.cloud.netflix.eureka.server.EurekaController.status(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)
+2017-04-10 12:47:32.236  INFO 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/lastn],methods=[GET]}" onto public java.lang.String org.springframework.cloud.netflix.eureka.server.EurekaController.lastn(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)
+2017-04-10 12:47:32.271  INFO 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-04-10 12:47:32.273  INFO 1 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-04-10 12:47:32.657  INFO 1 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-04-10 12:47:32.658  INFO 1 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-04-10 12:47:33.246  INFO 1 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-04-10 12:47:40.264  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2017-04-10 12:47:40.284  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.293  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.302  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.309  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2017-04-10 12:47:40.326  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/pause || /pause.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-04-10 12:47:40.337  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/refresh || /refresh.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-04-10 12:47:40.347  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.357  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.368  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/restart || /restart.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.restart.RestartMvcEndpoint.invoke()
+2017-04-10 12:47:40.386  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.value(java.util.Map<java.lang.String, java.lang.String>)
+2017-04-10 12:47:40.412  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/reset],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.reset()
+2017-04-10 12:47:40.431  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/archaius || /archaius.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.460  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/heapdump || /heapdump.json],methods=[GET],produces=[application/octet-stream]}" onto public void org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint.invoke(boolean,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,javax.servlet.ServletException
+2017-04-10 12:47:40.472  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.527  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.566  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/features || /features.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.577  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/resume || /resume.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-04-10 12:47:40.608  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2017-04-10 12:47:40.611  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:40.621  INFO 1 --- [           main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-04-10 12:47:42.612  INFO 1 --- [           main] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@531be3c5: startup date [Mon Apr 10 12:46:50 UTC 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@244038d0] and template loader path [classpath:/templates/]
+2017-04-10 12:47:42.624  INFO 1 --- [           main] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2017-04-10 12:47:43.956  WARN 1 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-04-10 12:47:43.957  INFO 1 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-04-10 12:47:44.059  WARN 1 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-04-10 12:47:44.079  INFO 1 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-04-10 12:47:44.786  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-10 12:47:44.872  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-04-10 12:47:44.876  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-04-10 12:47:44.891  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-04-10 12:47:44.902  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-04-10 12:47:44.922  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-04-10 12:47:44.954  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-04-10 12:47:45.148  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-04-10 12:47:45.264  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-04-10 12:47:45.422  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=531be3c5,type=ConfigurationPropertiesRebinder]
+2017-04-10 12:47:45.522  INFO 1 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-04-10 12:47:46.449  INFO 1 --- [           main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2017-04-10 12:47:46.500  INFO 1 --- [           main] c.n.e.EurekaDiscoveryClientConfiguration : Registering application registry with eureka with status UP
+2017-04-10 12:47:46.502  INFO 1 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Setting the eureka configuration..
+2017-04-10 12:47:46.505  INFO 1 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka data center value eureka.datacenter is not set, defaulting to default
+2017-04-10 12:47:46.507  INFO 1 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka environment value eureka.environment is not set, defaulting to test
+2017-04-10 12:47:46.829  INFO 1 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2017-04-10 12:47:46.831  INFO 1 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2017-04-10 12:47:46.831  INFO 1 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2017-04-10 12:47:46.831  INFO 1 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2017-04-10 12:47:46.832  INFO 1 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2017-04-10 12:47:46.903  INFO 1 --- [      Thread-10] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2017-04-10 12:47:47.588  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8761 (http)
+2017-04-10 12:47:47.611  INFO 1 --- [           main] c.n.e.EurekaDiscoveryClientConfiguration : Updating port to 8761
+2017-04-10 12:47:47.662  INFO 1 --- [           main] com.dminc.registry.RegistryApplication   : Started RegistryApplication in 74.072 seconds (JVM running for 77.656)
+2017-04-10 12:47:49.720  INFO 1 --- [nio-8761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-04-10 12:47:49.721  INFO 1 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-04-10 12:47:49.780  INFO 1 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 59 ms
+2017-04-10 12:47:51.367  INFO 1 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/a4cdf06938ae:gateway:4000 with status UP (replication=false)
+2017-04-10 12:47:52.679  INFO 1 --- [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/a4cdf06938ae:gateway:4000 with status UP (replication=true)
+2017-04-10 12:47:59.197  INFO 1 --- [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance SHOW-SERVICE/48779f7e227b:show-service:6100 with status UP (replication=false)
+2017-04-10 12:47:59.706  INFO 1 --- [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance SHOW-SERVICE/48779f7e227b:show-service:6100 with status UP (replication=true)
+2017-04-10 12:48:12.859  WARN 1 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: lease doesn't exist, registering resource: AUTH-SERVICE - 5527797977b5:auth-service:5000
+2017-04-10 12:48:12.859  WARN 1 --- [nio-8761-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Renew): AUTH-SERVICE - 5527797977b5:auth-service:5000
+2017-04-10 12:48:13.027  INFO 1 --- [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance AUTH-SERVICE/5527797977b5:auth-service:5000 with status UP (replication=false)
+2017-04-10 12:48:13.541  INFO 1 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance AUTH-SERVICE/5527797977b5:auth-service:5000 with status UP (replication=true)
+2017-04-10 12:48:13.701  INFO 1 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance AUTH-SERVICE/5527797977b5:auth-service:5000 with status UP (replication=false)
+2017-04-10 12:48:14.218  INFO 1 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance AUTH-SERVICE/5527797977b5:auth-service:5000 with status UP (replication=true)
+2017-04-10 12:48:46.835  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:49:46.836  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:50:46.836  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:51:46.837  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 12:52:46.838  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:53:46.839  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 12:54:46.840  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:55:46.841  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 12:56:46.842  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:57:46.842  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 12:58:46.843  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 12:59:46.843  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:00:46.843  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:01:46.844  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:02:27.806  INFO 1 --- [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 6
+2017-04-10 13:02:46.844  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:03:46.844  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:04:46.845  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:05:46.846  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:06:46.847  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 13:07:46.848  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 13:08:46.848  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-10 13:09:46.849  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 13:10:46.851  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-10 13:11:48.039  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1187ms
+2017-04-11 06:15:02.068  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:15:02.071  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Evicting 1 items (expired=3, evictionLimit=1)
+2017-04-11 06:15:02.072  WARN 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: expired lease for GATEWAY/a4cdf06938ae:gateway:4000
+2017-04-11 06:15:02.073  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance GATEWAY/a4cdf06938ae:gateway:4000 (replication=false)
+2017-04-11 06:18:59.063  WARN 1 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: lease doesn't exist, registering resource: GATEWAY - a4cdf06938ae:gateway:4000
+2017-04-11 06:18:59.064  WARN 1 --- [io-8761-exec-10] c.n.eureka.resources.InstanceResource    : Not Found (Renew): GATEWAY - a4cdf06938ae:gateway:4000
+2017-04-11 06:18:59.085  INFO 1 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/a4cdf06938ae:gateway:4000 with status UP (replication=false)
+2017-04-11 06:18:59.601  INFO 1 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/a4cdf06938ae:gateway:4000 with status UP (replication=true)
+2017-04-11 06:20:06.004  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:21:06.005  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:22:06.006  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:23:06.007  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:23:45.778  INFO 1 --- [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 8
+2017-04-11 06:24:06.008  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:25:06.009  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:26:06.009  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:27:06.010  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:28:06.010  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:29:06.010  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:30:06.011  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:31:06.012  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:32:06.012  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:36:46.021  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:37:46.021  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:38:46.021  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:39:46.022  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:40:46.022  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:41:46.023  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:42:25.786  INFO 1 --- [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 8
+2017-04-11 06:42:46.024  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:43:46.026  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:44:46.028  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2017-04-11 06:45:46.030  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2017-04-11 06:46:46.032  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:47:46.033  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:48:46.034  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2017-04-11 06:49:46.034  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2017-04-11 06:50:46.035  INFO 1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms

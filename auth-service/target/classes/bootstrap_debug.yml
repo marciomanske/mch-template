@@ -1,0 +1,16 @@
+eureka:
+  client:
+    enabled: false
+    
+spring:
+  data:
+    mongodb:
+      host: localhost
+      username: user
+      password: dminc
+      database: dmi
+      port: 25000
+
+server:
+  context-path: /uaa
+  port: 5111    
