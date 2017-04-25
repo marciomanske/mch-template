@@ -10,4 +10,5 @@ public interface ShowService {
     Show createShow(Show show);
     Show saveShow(Show show);
     Show findByNameAndYear(String name, Integer year);
+    Show incrementNumberOfEvents(String showId, int amount);
 }

@@ -57,6 +57,26 @@ public class ShowServiceTest {
         verify(showRepository, times(1)).save(show);
     }
     
+    @Test
+    public void shouldCreateAndIncrementEvents() {
+        Show show = Show.builder().id("1")
+                .name("Miami")
+                .editionYear(2017)
+                .endDate("2017-09-10")
+                .startDate("2017-09-15")
+                .build();
+    
+        //when(showService.findByNameAndYear(show.getName(), show.getEditionYear())).thenReturn(show);
+        when(showRepository.findOne(show.getId())).thenReturn(show);
+        
+        String showId = show.getId();
+        int amount = 1;
+        
+        showService.incrementNumberOfEvents(showId, amount);
+        assertEquals(show.getNumberOfEvents(), Integer.valueOf(1));
+        
+    }
+    
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailWhenShowIsDuplicated() {
         Show show = Show.builder()

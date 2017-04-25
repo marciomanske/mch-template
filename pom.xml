@@ -12,7 +12,7 @@
   	<module>gateway</module>
   	<module>registry</module>
   	<module>auth-service</module>
-  	
   	<module>show-service</module>
+  	<module>event-service</module>
   </modules>
 </project>

@@ -39,3 +39,13 @@ services:
     ports:
       - 26000:27017
     
+  event-service:
+    build: event-service
+    ports:
+      - 7100:7100
+
+  event-mongodb:
+    build: mongodb
+    ports:
+      - 27000:27017
+    

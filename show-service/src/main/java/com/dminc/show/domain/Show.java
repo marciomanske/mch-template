@@ -22,6 +22,7 @@ public class Show {
     private String startDate;
     private String endDate;
     private String status;
+    private Integer numberOfEvents = 0;
     
     public String getId() {
         return id;
@@ -56,13 +57,15 @@ public class Show {
     public Show() {
           
     }
-    public Show(String id, String name, Integer editionYear, String startDate, String endDate, String status) {
+    public Show(String id, String name, Integer editionYear, String startDate, String endDate, String status,
+            Integer numberOfEvents) {
         this.id = id;
         this.name = name;
         this.editionYear = editionYear;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+        this.numberOfEvents = numberOfEvents;
     }
     public String getStatus() {
         return status;
@@ -72,6 +75,14 @@ public class Show {
     }
     
     
-    
+    public void addNumberOfEvents(int amount) {
+        this.numberOfEvents = this.numberOfEvents==null?amount: this.numberOfEvents+amount;
+    }
+    public Integer getNumberOfEvents() {
+        return numberOfEvents;
+    }
+    public void setNumberOfEvents(Integer numberOfEvents) {
+        this.numberOfEvents = numberOfEvents;
+    }
     
 }

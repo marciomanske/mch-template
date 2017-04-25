@@ -1,4 +1,4 @@
-package com.dminc.show;
+package com.dminc.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -21,42 +21,36 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
-import com.dminc.show.service.security.CustomUserInfoTokenServices;
+import com.dminc.event.service.security.CustomUserInfoTokenServices;
 
 import feign.RequestInterceptor;
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
-@EnableResourceServer
 @EnableDiscoveryClient
+@EnableResourceServer
 @EnableOAuth2Client
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
 @Configuration
-public class ShowApplication extends ResourceServerConfigurerAdapter {
+@Slf4j
+public class EventApplication extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private ResourceServerProperties sso;
-
-    @Autowired
-    private CredentialConfiguration credentialConfiguration;
     
     public static void main(String[] args) {
-        SpringApplication.run(ShowApplication.class, args);
+        SpringApplication.run(EventApplication.class, args);
     }
-    
-    @Bean
-    public ResourceServerTokenServices tokenServices() {
-        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-    }
-    
+
     @Bean
     @ConfigurationProperties(prefix = "security.oauth2.client")
     public ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
-        ClientCredentialsResourceDetails client = new ClientCredentialsResourceDetails();
-        client.setAccessTokenUri(credentialConfiguration.getAccessTokenUri());
-        client.setClientId(credentialConfiguration.getClientId());
-        client.setClientSecret(credentialConfiguration.getClientSecret());
+        ClientCredentialsResourceDetails client = new ClientCredentialsResourceDetails(); 
+        client.setClientId("event-service");
+        client.setClientSecret("dminc");
+        client.setAccessTokenUri("http://auth-service:5000/uaa/oauth/token");
         return client; 
     }
 
@@ -69,12 +63,18 @@ public class ShowApplication extends ResourceServerConfigurerAdapter {
     public OAuth2RestTemplate clientCredentialsRestTemplate() {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
+
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        log.info("sso.getUserInfoUri(): {}, sso.getClientId(): {}", sso.getUserInfoUri(), sso.getClientId());
+        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+    }
     
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/" , "/shows").permitAll()
+                .antMatchers("/" , "/events").permitAll()
                 .anyRequest().authenticated();
     }
-    
+  
 }

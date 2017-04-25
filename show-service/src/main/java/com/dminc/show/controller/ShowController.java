@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,4 +41,10 @@ public class ShowController {
         return showService.saveShow(show);
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
+    @RequestMapping(path="/{showId}/events/{amount}", method = RequestMethod.PUT)
+    public Show incrementNumberOfEvents(@PathVariable String showId, @PathVariable int amount) {
+        return showService.incrementNumberOfEvents(showId, amount);
+    }
+    
 }

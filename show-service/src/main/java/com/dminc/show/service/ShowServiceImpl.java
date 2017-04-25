@@ -65,5 +65,19 @@ public class ShowServiceImpl implements ShowService {
         return show;
     }
 
+    @Override
+    public Show incrementNumberOfEvents(String showId, int amount) {
+        Assert.notNull(showId);
+        Assert.hasLength(showId);
+        Assert.isTrue(amount != 0, "Amount can't be 0");
+        Show show = showRepository.findOne(showId);
+        
+        Assert.notNull(show, String.format("Show does not exist id: %s", showId));
+        
+        show.addNumberOfEvents(amount);
+        
+        return this.saveShow(show); 
+    }
+
 
 }

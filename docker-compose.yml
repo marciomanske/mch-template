@@ -47,7 +47,8 @@ services:
   auth-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      SHOW_SERVICE_PASSWORD: $SHOW_SERVICE_PASSWORD
+      SHOW_SERVICE_PASSWORD: $SERVICE_PASSWORD
+      EVENT_SERVICE_PASSWORD: $SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: dminc/mch-auth-service
     restart: always
@@ -84,7 +85,7 @@ services:
   show-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      SHOW_SERVICE_PASSWORD: $SHOW_SERVICE_PASSWORD
+      SHOW_SERVICE_PASSWORD: $SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: dminc/mch-show-service
     restart: always
@@ -103,4 +104,27 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+        
+  event-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      EVENT_SERVICE_PASSWORD: $SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: dminc/mch-event-service
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  event-mongodb:
+    environment:
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: dminc/mch-mongodb
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
         
