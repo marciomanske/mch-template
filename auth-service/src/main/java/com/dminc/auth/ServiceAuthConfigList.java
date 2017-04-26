@@ -6,14 +6,15 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Component
 @ConfigurationProperties(prefix="serviceauthconfig")
-public class ServiceAuthConfig {
+@Setter
+@Getter
+public class ServiceAuthConfigList {
 
-    public List<String> services = new ArrayList<>();
-
-    public List<String> getServices() {
-        return services;
-    }
+    private List<ServiceAuthConfig> services = new ArrayList<>();
     
 }

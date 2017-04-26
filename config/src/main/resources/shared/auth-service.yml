@@ -13,4 +13,11 @@ server:
 
 serviceauthconfig:
   services:
-    - show-service   
+    - serviceName: show-service
+      secret: dminc
+      authorizedGrantTypes: client_credentials, refresh_token
+      scopes: server     
+    - serviceName: event-service
+      secret: dminc
+      authorizedGrantTypes: client_credentials, refresh_token
+      scopes: server     

@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -79,11 +78,11 @@ public class AuthApplication {
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
         
-        @Autowired
-        private Environment env;
+        //@Autowired
+        //private Environment env;
 
         @Autowired
-        private ServiceAuthConfig serviceAuthConfig;  
+        private ServiceAuthConfigList serviceAuthConfigList;  
         
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -103,22 +102,37 @@ public class AuthApplication {
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             
-            log.info("Configuring client details service...");
+            log.info("Loading client details service...");
+            /*
+            clients.inMemory().withClient("browser")
+                .authorizedGrantTypes("refresh_token", "password")
+                .scopes("ui", "read", "write", "trust")
+                .and()
+                .withClient("event-service")
+                .secret("dminc")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+                .and()
+                .withClient("show-service")
+                .secret("dminc")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server"); */
+
             
             ClientBuilder builder = clients.inMemory().withClient("browser")
                             .authorizedGrantTypes("refresh_token", "password")
                             .scopes("ui", "read", "write", "trust");
             
-            serviceAuthConfig.getServices().forEach(
-                    serviceName -> {
+            serviceAuthConfigList.getServices().forEach(
+                    serviceAuthConfig -> {
+                        log.info("Config: {}", serviceAuthConfig.toString());
                         builder.and()
-                        .withClient(serviceName)
-                        .secret(env.getProperty("SERVICE_PASSWORD"))
-                        .authorizedGrantTypes("client_credentials", "refresh_token")
-                        .scopes("server");
-                        log.info("Service {} configured", serviceName);
+                        .withClient(serviceAuthConfig.getServiceName())
+                        .secret(serviceAuthConfig.getSecret())
+                        .authorizedGrantTypes(serviceAuthConfig.getAuthorizedGrantTypes())
+                        .scopes(serviceAuthConfig.getScopes());
                     }
-            );
+            ); 
         }
         
         /*

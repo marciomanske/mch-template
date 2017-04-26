@@ -29,5 +29,11 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    event-service:
+        path: /events/**
+        serviceId: EVENT-SERVICE
+        stripPrefix: false
+        sensitiveHeaders:
+
 server:
   port: 4000
