@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 import com.dminc.event.service.security.CustomUserInfoTokenServices;
+import com.dminc.event.CredentialConfiguration;
 
 import feign.RequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,9 @@ public class EventApplication extends ResourceServerConfigurerAdapter {
     @Autowired
     private ResourceServerProperties sso;
     
+    @Autowired
+    private CredentialConfiguration credentialConfiguration;
+
     public static void main(String[] args) {
         SpringApplication.run(EventApplication.class, args);
     }
@@ -47,10 +51,12 @@ public class EventApplication extends ResourceServerConfigurerAdapter {
     @Bean
     @ConfigurationProperties(prefix = "security.oauth2.client")
     public ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
-        ClientCredentialsResourceDetails client = new ClientCredentialsResourceDetails(); 
-        client.setClientId("event-service");
-        client.setClientSecret("dminc");
-        client.setAccessTokenUri("http://auth-service:5000/uaa/oauth/token");
+        ClientCredentialsResourceDetails client = new ClientCredentialsResourceDetails();
+        client.setAccessTokenUri(credentialConfiguration.getAccessTokenUri());
+        client.setClientId(credentialConfiguration.getClientId());
+        client.setClientSecret(credentialConfiguration.getClientSecret());
+        log.info("Credentials: {}", credentialConfiguration.toString());
+        log.info("client.getClientSecret() = {}", client.getClientSecret());
         return client; 
     }
 

@@ -2,7 +2,7 @@ security:
   oauth2:
     client:
       clientId: event-service
-      clientSecret: ${SERVICE_PASSWORD}
+      clientSecret: dminc
       accessTokenUri: http://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
