@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dminc.event.domain.Event;
+import com.dminc.event.domain.Show;
 import com.dminc.event.service.EventService;
 
 @RestController
@@ -36,6 +37,11 @@ public class EventController {
     @RequestMapping(method = RequestMethod.GET)
     public List<Event> findAll() {
         return eventService.findAll();
+    }
+    
+    @RequestMapping(path="/shows", method = RequestMethod.GET)
+    public List<Show> findAllShows() {
+        return eventService.findAllShows();
     }
 
 }

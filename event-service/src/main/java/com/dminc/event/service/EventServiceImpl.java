@@ -72,4 +72,9 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findOne(id);
     }
 
+    @Override
+    public List<Show> findAllShows() {
+        return showServiceClient.getAllShows();
+    }
+
 }
