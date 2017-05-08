@@ -1,6 +1,5 @@
 package com.dminc.show.domain;
 
-//import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,7 +10,6 @@ import lombok.ToString;
 @Builder
 @ToString
 @Document(collection = "shows")
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Show {
     
     @Id
@@ -23,6 +21,20 @@ public class Show {
     private String endDate;
     private String status;
     private Integer numberOfEvents = 0;
+    
+    public Show() {
+        this(null, null, null, null, null, null, null);
+    }
+    public Show(String id, String name, Integer editionYear, String startDate, String endDate, String status,
+            Integer numberOfEvents) {
+        this.id = id;
+        this.name = name;
+        this.editionYear = editionYear;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.numberOfEvents = numberOfEvents;
+    }
     
     public String getId() {
         return id;
@@ -54,19 +66,7 @@ public class Show {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-    public Show() {
-          
-    }
-    public Show(String id, String name, Integer editionYear, String startDate, String endDate, String status,
-            Integer numberOfEvents) {
-        this.id = id;
-        this.name = name;
-        this.editionYear = editionYear;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.numberOfEvents = numberOfEvents;
-    }
+   
     public String getStatus() {
         return status;
     }

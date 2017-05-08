@@ -61,8 +61,7 @@ public class ShowServiceImpl implements ShowService {
     public Show findByNameAndYear(String name, Integer year) {
         Assert.hasLength(name);
         Assert.notNull(year);
-        Show show = showRepository.findByNameAndEditionYear(name, year);
-        return show;
+        return showRepository.findByNameAndEditionYear(name, year);
     }
 
     @Override

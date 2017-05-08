@@ -11,7 +11,6 @@ import java.util.Set;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.FixedAuthoritiesExtractor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -38,6 +37,8 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 			"userid", "user_id", "login", "id", "name" };
 
 	private final String userInfoEndpointUrl;
+	
+	private static final String ERROR = "error"; 
 
 	private final String clientId;
 
@@ -66,10 +67,10 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
 	@Override
 	public OAuth2Authentication loadAuthentication(String accessToken)
-			throws AuthenticationException, InvalidTokenException {
+			{
 		Map<String, Object> map = getMap(this.userInfoEndpointUrl, accessToken);
-		if (map.containsKey("error")) {
-			log.debug("userinfo returned error: " + map.get("error"));
+		if (map.containsKey(ERROR)) {
+			log.debug("userinfo returned error: " + map.get(ERROR));
 			throw new InvalidTokenException(accessToken);
 		}
 		return extractAuthentication(map);
@@ -99,11 +100,11 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 	private OAuth2Request getRequest(Map<String, Object> map) {
 		Map<String, Object> request = (Map<String, Object>) map.get("oauth2Request");
 
-		String clientId = (String) request.get("clientId");
+		String id = (String) request.get("clientId");
 		Set<String> scope = new LinkedHashSet<>(request.containsKey("scope") ?
 				(Collection<String>) request.get("scope") : Collections.<String>emptySet());
 
-		return new OAuth2Request(null, clientId, null, true, new HashSet<>(scope),
+		return new OAuth2Request(null, id, null, true, new HashSet<>(scope),
 				null, null, null, null);
 	}
 
@@ -116,26 +117,26 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 	private Map<String, Object> getMap(String path, String accessToken) {
 		log.debug("Getting user info from: " + path);
 		try {
-			OAuth2RestOperations restTemplate = this.restTemplate;
-			if (restTemplate == null) {
+			OAuth2RestOperations localRestTemplate = this.restTemplate;
+			if (localRestTemplate == null) {
 				BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
 				resource.setClientId(this.clientId);
-				restTemplate = new OAuth2RestTemplate(resource);
+				localRestTemplate = new OAuth2RestTemplate(resource);
 			}
-			OAuth2AccessToken existingToken = restTemplate.getOAuth2ClientContext()
+			OAuth2AccessToken existingToken = localRestTemplate.getOAuth2ClientContext()
 					.getAccessToken();
 			if (existingToken == null || !accessToken.equals(existingToken.getValue())) {
 				DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(
 						accessToken);
 				token.setTokenType(this.tokenType);
-				restTemplate.getOAuth2ClientContext().setAccessToken(token);
+				localRestTemplate.getOAuth2ClientContext().setAccessToken(token);
 			}
-			return restTemplate.getForEntity(path, Map.class).getBody();
+			return localRestTemplate.getForEntity(path, Map.class).getBody();
 		}
 		catch (Exception ex) {
 			log.info("Could not fetch user details: " + ex.getClass() + ", "
 					+ ex.getMessage());
-			return Collections.<String, Object>singletonMap("error",
+			return Collections.<String, Object>singletonMap(ERROR,
 					"Could not fetch user details");
 		}
 	}
