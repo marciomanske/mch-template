@@ -41,6 +41,7 @@ public class ShowApplication extends ResourceServerConfigurerAdapter {
     @Autowired
     private CredentialConfiguration credentialConfiguration;
     
+  
     public static void main(String[] args) {
         SpringApplication.run(ShowApplication.class, args);
     }
