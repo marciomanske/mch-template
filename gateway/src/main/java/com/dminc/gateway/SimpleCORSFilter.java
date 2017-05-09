@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class SimpleCORSFilter implements Filter {
 
     @Override
     public void destroy() {
-        
+      log.info("Filter destroyed");  
         
     }
 
@@ -39,7 +42,7 @@ public class SimpleCORSFilter implements Filter {
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
-        
+        log.info("Filter initialized");
         
     }
 

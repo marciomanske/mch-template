@@ -42,7 +42,7 @@ public class AuthApplication {
    
     @Configuration
     @EnableWebSecurity
-    protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
+    protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
         private UserDetailsServiceImpl userDetailsService;
@@ -78,9 +78,6 @@ public class AuthApplication {
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
         
-        //@Autowired
-        //private Environment env;
-
         @Autowired
         private ServiceAuthConfigList serviceAuthConfigList;  
         
@@ -103,22 +100,6 @@ public class AuthApplication {
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             
             log.info("Loading client details service...");
-            /*
-            clients.inMemory().withClient("browser")
-                .authorizedGrantTypes("refresh_token", "password")
-                .scopes("ui", "read", "write", "trust")
-                .and()
-                .withClient("event-service")
-                .secret("dminc")
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server")
-                .and()
-                .withClient("show-service")
-                .secret("dminc")
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server"); */
-
-            
             ClientBuilder builder = clients.inMemory().withClient("browser")
                             .authorizedGrantTypes("refresh_token", "password")
                             .scopes("ui", "read", "write", "trust");
@@ -134,36 +115,6 @@ public class AuthApplication {
                     }
             ); 
         }
-        
-        /*
-        @Bean
-        @Primary
-        public DefaultTokenServices tokenServices() {
-            DefaultTokenServices tokenServices = new DefaultTokenServices();
-            tokenServices.setSupportRefreshToken(true);
-            tokenServices.setTokenStore(this.tokenStore);
-            tokenServices.setTokenEnhancer(tokenEnhancer());
-            return tokenServices;
-        }
-        @Bean
-        public TokenEnhancer tokenEnhancer() {
-            return new CustomTokenEnhancer();
-        }
-        
-        public class CustomTokenEnhancer implements TokenEnhancer {
-            @Override
-            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-                User user = (User) authentication.getPrincipal();
-                log.info("CustomTokenEnhancer: {}", user.getUsername());
-                final Map<String, Object> additionalInfo = new HashMap<>();
-                
-                additionalInfo.put("User", userDetailsService.loadUserByUsername(user.getUsername()));
-                log.info("CustomTokenEnhancer: Included user details");
-                ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-
-                return accessToken;
-            }
-        }  */
     }
 
 }
